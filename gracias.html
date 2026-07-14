@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gracias · Pasos de fe, Obra de amor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500;1,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Jost:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#EFE6D3;
+  --ink:#3A2E22;
+  --ink-soft:#5A4A38;
+  --rust:#9C5A3C;
+  --rust-deep:#7C4630;
+  --gold:#B8923F;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;height:100%;}
+body{
+  background:var(--paper);
+  background-image:
+    radial-gradient(ellipse at top left, rgba(184,146,63,0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(156,90,60,0.08), transparent 55%);
+  color:var(--ink);
+  font-family:'Source Serif 4', serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:24px;
+}
+.card{
+  max-width:480px;
+  width:100%;
+  text-align:center;
+  background:rgba(255,255,255,0.4);
+  border:1px solid rgba(58,46,34,0.15);
+  padding:44px 32px;
+}
+.foot{width:30px; height:38px; fill:var(--gold); margin-bottom:18px;}
+h1{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-weight:600;
+  font-size:2rem;
+  margin:0 0 14px;
+}
+p{color:var(--ink-soft); font-size:1rem; margin:0 0 6px; line-height:1.5;}
+.spinner{
+  width:26px; height:26px;
+  border:3px solid rgba(58,46,34,0.15);
+  border-top-color:var(--rust);
+  border-radius:50%;
+  margin:26px auto 10px;
+  animation:spin 0.9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.btn{
+  display:inline-block;
+  margin-top:22px;
+  font-family:'Jost',sans-serif;
+  font-weight:600;
+  font-size:15px;
+  padding:14px 30px;
+  background:var(--rust);
+  color:var(--paper);
+  text-decoration:none;
+  border-radius:2px;
+}
+.btn:hover{background:var(--rust-deep);}
+.help{
+  margin-top:26px;
+  font-family:'Jost',sans-serif;
+  font-size:12.5px;
+  color:var(--ink-soft);
+}
+.help a{color:var(--rust-deep);}
+.hidden{display:none;}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <svg class="foot" viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
+
+  <div id="checking">
+    <h1>Confirmando tu pago…</h1>
+    <p>Esto solo toma unos segundos.</p>
+    <div class="spinner"></div>
+  </div>
+
+  <div id="approved" class="hidden">
+    <h1>¡Gracias por tu apoyo!</h1>
+    <p>Tu pago fue confirmado. Aquí está tu copia de <em>Pasos de fe, Obra de amor</em>.</p>
+    <a id="downloadBtn" class="btn" href="#">Descargar mi libro (PDF)</a>
+  </div>
+
+  <div id="pending" class="hidden">
+    <h1>Un momento más…</h1>
+    <p>Tu pago está siendo procesado. Esta página se actualiza sola — no es necesario que hagas nada.</p>
+    <div class="spinner"></div>
+  </div>
+
+  <div id="notfound" class="hidden">
+    <h1>No encontramos tu pago</h1>
+    <p>Si acabas de pagar, escríbenos y te enviamos el libro manualmente.</p>
+  </div>
+
+  <p class="help">¿Algún problema? Escríbenos por <a href="https://wa.me/573015996822" target="_blank">WhatsApp</a> o a <a href="mailto:dianam.saidc@gmail.com">dianam.saidc@gmail.com</a></p>
+</div>
+
+<script>
+const SUPABASE_URL = "https://hpcjmcxcwdqiztppbdxr.supabase.co";
+const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwY2ptY3hjd2RxaXp0cHBiZHhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQwNjA3NzksImV4cCI6MjA5OTYzNjc3OX0.1JOb7CMqcc3msAceMm7NICTBWMGHuEA3mshvaMXQUbY";
+
+const params = new URLSearchParams(window.location.search);
+const txId = params.get("id");
+const reference = params.get("reference");
+
+const show = (id) => {
+  ["checking","approved","pending","notfound"].forEach(s => {
+    document.getElementById(s).classList.toggle("hidden", s !== id);
+  });
+};
+
+async function checkStatus() {
+  if (!txId && !reference) {
+    show("notfound");
+    return;
+  }
+
+  const qs = txId ? `id=${encodeURIComponent(txId)}` : `reference=${encodeURIComponent(reference)}`;
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/get-download?${qs}`, {
+    headers: {
+      "apikey": ANON_KEY,
+      "Authorization": `Bearer ${ANON_KEY}`
+    }
+  });
+  const data = await res.json();
+
+  if (data.status === "APPROVED" && data.url) {
+    document.getElementById("downloadBtn").href = data.url;
+    show("approved");
+  } else if (data.status === "not_found") {
+    show("notfound");
+  } else {
+    show("pending");
+    setTimeout(checkStatus, 3000);
+  }
+}
+
+checkStatus();
+</script>
+
+</body>
+</html>
