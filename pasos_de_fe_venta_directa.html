@@ -228,6 +228,24 @@ h1{
 .purchase-intro strong{color:var(--ink);}
 .footcount{display:flex; gap:4px; margin-bottom:14px; height:26px;}
 .footcount .foot{width:16px; height:24px; fill:var(--rust); opacity:0.85;}
+
+.donate-box{
+  margin-top:40px;
+  padding-top:32px;
+  border-top:1px solid rgba(58,46,34,0.15);
+}
+.donate-text{
+  font-size:0.98rem;
+  color:var(--ink-soft);
+  max-width:52ch;
+  margin:0 0 18px;
+}
+.donate-text em{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  color:var(--ink);
+  font-size:1.08rem;
+}
 .steps{
   display:grid;
   grid-template-columns:1fr;
@@ -353,7 +371,7 @@ footer p{font-size:0.85rem; color:var(--ink-soft); font-family:'Jost',sans-serif
   <section class="purchase">
     <h2>Cómo obtener tu copia</h2>
     <div class="price-tag">$35.000 COP</div>
-    <p class="price-note">Equivale a aprox. <strong>US$7.99</strong> &mdash; si pagas con tarjeta desde otro país, Wompi cobra en pesos colombianos y tu banco hace la conversión automáticamente.</p>
+    <p class="price-note">Si pagas desde otro país, Wompi hace la conversión y realiza el cobro directamente al cambio de tu moneda local.</p>
 
     <p class="purchase-intro"><strong>Si pagas por Wompi</strong> (botón de arriba): el proceso es automático — pagas y en segundos te aparece el botón para descargar tu libro, sin que tengas que hacer nada más.</p>
     <p class="purchase-intro">Si no, tienes la opción de hacerlo por <strong>transferencia bancaria directa</strong>, siguiendo estos 3 pasos:</p>
@@ -377,6 +395,11 @@ footer p{font-size:0.85rem; color:var(--ink-soft); font-family:'Jost',sans-serif
         <p>Te enviamos el PDF completo directo a tu correo o WhatsApp.</p>
         <div class="detail">Entrega inmediata</div>
       </div>
+    </div>
+
+    <div class="donate-box">
+      <p class="donate-text">¿Prefieres aportar otro monto? <em>Cada aporte, por pequeño que sea, se convierte en un paso más de esta obra de amor.</em></p>
+      <a class="btn btn-ghost" href="https://checkout.wompi.co/l/jVnZCL" target="_blank">Hacer una donación libre</a>
     </div>
   </section>
 </div>
