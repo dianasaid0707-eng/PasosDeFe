@@ -124,7 +124,7 @@ h1{
   padding:6px 0 46px;
   opacity:0.85;
 }
-.trail svg{width:20px; height:26px; fill:var(--gold); opacity:0.75;}
+.trail svg{width:18px; height:27px; fill:var(--gold); opacity:0.75;}
 .trail svg:nth-child(2n){ transform:translateY(8px) rotate(-6deg); opacity:0.55;}
 .trail svg:nth-child(2n+1){ transform:translateY(-2px) rotate(5deg);}
 
@@ -211,6 +211,15 @@ h1{
   font-weight:600;
   margin:0 0 30px;
 }
+.purchase-intro{
+  font-size:0.98rem;
+  color:var(--ink-soft);
+  max-width:60ch;
+  margin:0 0 10px;
+}
+.purchase-intro strong{color:var(--ink);}
+.footcount{display:flex; gap:4px; margin-bottom:14px; height:26px;}
+.footcount .foot{width:16px; height:24px; fill:var(--rust); opacity:0.85;}
 .steps{
   display:grid;
   grid-template-columns:1fr;
@@ -224,9 +233,6 @@ h1{
   border:1px solid rgba(58,46,34,0.15);
   padding:24px 22px;
   position:relative;
-}
-.step .foot{
-  width:22px; height:28px; fill:var(--rust); opacity:0.85; margin-bottom:14px;
 }
 .step h3{
   font-family:'Source Serif 4', serif;
@@ -264,6 +270,19 @@ footer p{font-size:0.85rem; color:var(--ink-soft); font-family:'Jost',sans-serif
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="foot" viewBox="0 0 100 150">
+      <ellipse cx="47" cy="95" rx="30" ry="48" transform="rotate(-6 47 95)"/>
+      <ellipse cx="18" cy="46" rx="10" ry="14" transform="rotate(-18 18 46)"/>
+      <ellipse cx="37" cy="27" rx="10" ry="15" transform="rotate(-8 37 27)"/>
+      <ellipse cx="58" cy="20" rx="9.5" ry="14.5"/>
+      <ellipse cx="78" cy="25" rx="8.5" ry="13" transform="rotate(10 78 25)"/>
+      <ellipse cx="93" cy="38" rx="7.5" ry="11" transform="rotate(22 93 38)"/>
+    </symbol>
+  </defs>
+</svg>
+
 <div class="wrap">
   <section class="hero">
     <div class="cover-frame">
@@ -282,10 +301,10 @@ footer p{font-size:0.85rem; color:var(--ink-soft); font-family:'Jost',sans-serif
   </section>
 
   <div class="trail" aria-hidden="true">
-    <svg viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
-    <svg viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
-    <svg viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
-    <svg viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
+    <svg viewBox="0 0 100 150"><use href="#foot"/></svg>
+    <svg viewBox="0 0 100 150"><use href="#foot"/></svg>
+    <svg viewBox="0 0 100 150"><use href="#foot"/></svg>
+    <svg viewBox="0 0 100 150"><use href="#foot"/></svg>
   </div>
 
   <section class="story">
@@ -317,21 +336,25 @@ footer p{font-size:0.85rem; color:var(--ink-soft); font-family:'Jost',sans-serif
   <section class="purchase">
     <h2>Cómo obtener tu copia</h2>
     <div class="price-tag">$25.000 COP</div>
+
+    <p class="purchase-intro"><strong>Si pagas por Wompi</strong> (botón de arriba): el proceso es automático — pagas y en segundos te aparece el botón para descargar tu libro, sin que tengas que hacer nada más.</p>
+    <p class="purchase-intro">Si no, tienes la opción de hacerlo por <strong>transferencia bancaria directa</strong>, siguiendo estos 3 pasos:</p>
+
     <div class="steps">
       <div class="step">
-        <svg class="foot" viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
+        <div class="footcount"><svg class="foot"><use href="#foot"/></svg></div>
         <h3>Transfiere el valor</h3>
         <p>Bancolombia &middot; Cuenta de ahorros</p>
         <div class="detail">No. 10192714080<br>Diana María Said Cadavid</div>
       </div>
       <div class="step">
-        <svg class="foot" viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
+        <div class="footcount"><svg class="foot"><use href="#foot"/></svg><svg class="foot"><use href="#foot"/></svg></div>
         <h3>Envía tu comprobante</h3>
         <p>Por WhatsApp o correo electrónico, para confirmar tu compra.</p>
         <div class="detail">+57 301 599 6822<br>dianam.saidc@gmail.com</div>
       </div>
       <div class="step">
-        <svg class="foot" viewBox="0 0 40 52"><path d="M20 2c6 0 9 6 9 13 0 8-4 12-4 20 0 8-4 15-10 15S5 43 5 35c0-8 3-9 3-17C8 8 13 2 20 2z"/></svg>
+        <div class="footcount"><svg class="foot"><use href="#foot"/></svg><svg class="foot"><use href="#foot"/></svg><svg class="foot"><use href="#foot"/></svg></div>
         <h3>Recibe tu libro</h3>
         <p>Te enviamos el PDF completo directo a tu correo o WhatsApp.</p>
         <div class="detail">Entrega inmediata</div>
